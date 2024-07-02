@@ -226,6 +226,28 @@ let num = +12; // 12
 let num = +"234"; // 234
 ```
 
+### 逻辑运算符
+
+或运算符`||`会从左到右寻找真值，当找到可以转换为真值的值，那么直接返回**该值本身**
+
+```javascript
+let res = "" || null || "Hello"; // "Hello"
+```
+
+且运算符`&&`会从左到右寻找假值，当找到可以转换为假值的值，那么直接返回**该值本身**
+
+```javascript
+let res = 1 || "OK" || null; // null
+```
+
+空值合并运算符`??`会从左到右寻找非`null`或`undefined`的值，当找到，那么直接返回**该值本身**
+
+```javascript
+let name = username ?? "anonymity"; // 当username为null或undefined，那么返回"anonymity"
+```
+
+非运算`!`会将值转换为布尔类型，然后取反
+
 ### 运算符优先级
 
 [运算符优先级表](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_precedence#%E6%B1%87%E6%80%BB%E8%A1%A8)
@@ -237,6 +259,7 @@ let num = 2; // [=] 赋值运算符
 num *= 2; // [+=] [-=] [*=] [/=] [**=] [%=] 原地修改运算符
 let num2 = (num *= 2, num) // [,] 逗号运算符
 num++;num--;++num;--num; // [++] [--] 自增/自减运算符
+let res = num1 > num2 ? num1 : num2; // [?:]条件运算符
 ```
 
 > 这些运算都与C类语言运算一致
@@ -246,6 +269,8 @@ num++;num--;++num;--num; // [++] [--] 自增/自减运算符
 > [,] 逗号运算符会返回最后一个表达式的结果
 >
 > [++] [--] 前置表示当场运算并返回结果，后置表示先返回结果，再进行自增或自减运算
+>
+> [?:] 前面表达式的结果为真，则返回冒号前的结果，为假，则返回冒号后的结果
 
 比较运算符在下一段介绍
 
@@ -287,3 +312,108 @@ num++;num--;++num;--num; // [++] [--] 自增/自减运算符
 
 与上段中不同类型判等相同，但是不会进行转换，而且`null === undefined`返回`false`，因此不同类型总是不会严格相等的
 
+## 流程控制
+
+### 条件语句`if` `else if` `else`
+
+语法与C类语言一致
+
+```javascript
+let condition = 5;
+if(condition < 0){
+    //...
+}
+else if(condition > 10){
+    //...
+}
+else{
+    //...
+}
+```
+
+如果`if`条件内不是布尔类型，那么会自动转换为布尔类型
+
+### 循环语句
+
+#### `while` `do ... while`
+
+语法与C类语言一致
+
+```javascript
+// 当condition为真时，进入循环体
+while (condition) {
+    //...
+}
+//先执行循环体，如果condition为假再退出
+do{
+    //...
+}while(condition)
+```
+
+如果`while`条件内不是布尔类型，那么会自动转换为布尔类型
+
+#### `for(init;condition;step)`
+
+语法与C类语言一致
+
+```javascript
+// 循环执行十次
+for(let i = 0; i < 10; i++){
+    //...
+}
+```
+
+#### `for in`
+
+遍历对象的所有属性名
+
+```javascript
+let obj = {"a": 1, "b": 2, "c": 3};
+//输出 a b c
+for(let key in obj){
+    console.log(key);
+}
+```
+
+#### `for of`
+
+遍历可迭代对象
+
+```javascript
+let arr = [1, 2, 3, 4];
+//输出 1 2 3 4
+for(let item of arr){
+    console.log(item);
+}
+```
+
+> 实现了`Symbol.iterator`方法为可迭代对象，将根据自定义规则进行迭代
+
+#### 循环控制
+
+- `break`：直接跳出当前循环
+- `continue`：回到循环开头，`for(init;condition;step)`将会先执行`step`表达式，`for in` `for of`会进入下一次迭代
+
+### `switch`语句
+
+语法与C类语言一致
+
+```javascript
+switch(condition){
+    case case1:
+        //匹配case1
+        break;
+    case case2:
+        //匹配case2
+    case case3:
+        //匹配case2或case3，因为上一段case没有break，会顺延到下一个case
+        break;
+    default:
+        //如果所有case都不满足
+        break;
+}
+```
+
+## 函数
+
+TODO
