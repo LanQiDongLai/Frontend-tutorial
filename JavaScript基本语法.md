@@ -416,4 +416,126 @@ switch(condition){
 
 ## 函数
 
-TODO
+### 函数声明式
+
+函数声明式声明形式
+
+```javascript
+function add(a, b){
+    return a + b;
+}
+```
+
+注意，函数参数和返回值都是动态的，函数参数只有变量名称，没有形参类型，同时函数也可以返回多种类型的返回值
+
+```javascript
+function func(a){
+    if(typeof a === "number")
+    	return 123;
+    else if(typeof a === "string")
+        return "string";
+}
+console.log(func(1)); // 123
+console.log(func("a")); // string
+```
+
+当函数直接`return`不附带任何变量，那么返回类型为`undefined`
+
+```javascript
+function func(){
+    //...
+}
+console.log(func());
+```
+
+调用函数时缺少参数是允许的，这会导致未给定参数的部分值为`undefined`
+
+```javascript
+function message(status, info){
+    if(info === undefined){
+        console.log("INFO NOT PROVIDED");
+    }
+}
+func("DEBUG"); // 参数info为undefined
+```
+
+缺省参数设置
+
+```javascript
+function message(status = "INFO", info = ""){
+    console.log(status + info);
+}
+func();
+```
+
+函数可以先调用再声明
+
+```javascript
+func();
+function func(){
+    //...
+}
+```
+
+函数可以被赋值到一个变量上
+
+```javascript
+function func(){
+	//...
+}
+let func1 = func;
+func1();
+```
+
+函数在块内声明在块外不可见
+
+```javascript
+function func(){
+    function func2(){
+        //...
+    }
+}
+func2(); //ERROR!
+```
+
+### 函数表达式（匿名函数）
+
+函数表达式声明形式
+
+```javascript
+let func = function(){
+    //...
+};
+```
+
+在这里函数是一个值，与类C语言的lambda函数表现形式类似
+
+```javascript
+// 回调函数实例
+function confirm(ifSure, yesFunc, noFunc){
+    if(ifSure){
+        yesFunc();
+    }
+    else{
+        noFunc();
+    }
+}
+confirm(true,
+        function(){console.log("yes");},
+        function(){console.log("no");});
+```
+
+### 箭头函数
+
+箭头函数是函数表达式的简写
+
+```javascript
+let add = (a, b) => {
+    console.log("add");
+    return a + b;
+};
+// 右侧只有一行语句可以简写
+let add = (a, b) => a + b;
+// 当参数只有一个的时候可以省略括号
+let add_five = a => a + 5;
+```
