@@ -119,13 +119,13 @@ TODO
 
 #### 符号类型（symbol）
 
-TODO
+[详见](./JavaScript对象#符号（Symbol）)
 
 ### 复杂数据类型（对象类型）
 
 #### 类类型（object）
 
-TODO
+[详见](./JavaScript对象)
 
 #### 数组（array）
 
@@ -133,7 +133,7 @@ TODO
 
 #### 函数类型（function）
 
-TODO
+[详见](#函数)
 
 ### 查看类型
 
